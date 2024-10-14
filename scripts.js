@@ -15,18 +15,38 @@ function getHumanChoice() {
     } else if (choice == "scissors") {
         return 2
     } else {
-        return 404
+        console.log("Invalid choice, try again");
+        return getHumanChoice
     }
 }
 
 function playRound(humanChoice, computerChoice) {
     if (humanChoice == computerChoice) {
-        return "Tie!"
+        console.log("Tie!");
     } else if ((humanChoice - computerChoice + 3) % 3 === 1) {
         humanScore++
-        return "Human Wins!"
+        console.log("Human Wins!");
     } else {
         computerScore++
-        return "Computer Wins!"
+        console.log("Computer Wins!")
     }
 }
+
+function playGame() {
+    for (let i = 0; i < 5; i++) {
+
+        playRound(getHumanChoice(), getComputerChoice());
+        console.log(`Round ${i + 1}`)
+    }
+    console.log(`Final Score: ${humanScore} to ${computerScore}`)
+
+    if (humanScore === computerScore) {
+        console.log("It's a tie!");
+    } else if (humanScore > computerScore) {
+        console.log("The humans are victorious!");
+    } else {
+        console.log("The computers have taken over...");
+    }
+}
+
+playGame();
